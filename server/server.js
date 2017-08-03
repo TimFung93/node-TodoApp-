@@ -1,3 +1,7 @@
+require('./config/config');
+
+
+
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -9,7 +13,7 @@ const {User} = require('./models/user');
 
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 
 //parse the body as json
@@ -98,6 +102,7 @@ app.patch('/todos/:id', (req, res) => {
 		body.completed = false;
 		body.completedAt = null;
 	}
+	
 
 	Todo.findByIdAndUpdate(id, {
 		$set: body
@@ -118,7 +123,7 @@ app.patch('/todos/:id', (req, res) => {
 
 
 app.listen(port, () => {
-	console.log(`"Started on port " ${port}`)
+	console.log(`Started on port ${port}`)
 });
 
 
