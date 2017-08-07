@@ -159,7 +159,7 @@ describe('PATCH /todos/:id', () => {
 	it('Should update a todo', (done) => {
 		const hexId = todos[0]._id.toHexString();
 		const text = 'This should be new text'
-
+		const date = new Date().getTime();
 		request(app)
 			.patch(`/todos/${hexId}`)
 			.send({
@@ -170,7 +170,7 @@ describe('PATCH /todos/:id', () => {
 			.expect(res => {
 				expect(res.body.todo.text).toBe(text);
 				expect(res.body.todo.completed).toBe(true);
-				//expect(res.body.todo.completedAt).toBeA("number");
+				//expect(res.body.todo.completedAt).toBeA('number');
 			})
 			.end(done);
 	});
