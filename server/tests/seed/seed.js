@@ -19,13 +19,20 @@ const users = [{
 		token: jwt.sign({
 			_id: userOneId,
 			access: 'auth'
-		}, 'abc123').toString()
+		}, process.env.jwt_secret).toString()
 	}]
 }, {
 	//invalid jwt token
 	_id: userTwoId,
 	email: 'molly@example.com',
-	password: '1234567'
+	password: '1234567',
+		tokens: [{
+		access:'auth',
+		token: jwt.sign({
+			_id: userTwoId,
+			access: 'auth'
+		}, process.env.jwt_secret).toString()
+	}]
 
 }]
 
@@ -33,12 +40,14 @@ const users = [{
 
 const todos = [{
 	_id: new ObjectID(),
-	text: "First test todo"
+	text: "First test todo",
+	_user: userOneId
 }, {
 	_id: new ObjectID(),
 	text: "Second test todo",
 	completed: true,
-	completedAt: 333
+	completedAt: 333,
+	_user: userTwoId
 }];
 
 
